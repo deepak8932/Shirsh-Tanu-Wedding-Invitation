@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shirsh &amp; Tanu | Royal Wedding Invitation</title>
+    <meta
+      name="description"
+      content="Premium, royal Indian wedding invitation website for Shirsh Kumar Srivastav &amp; Tanu Srivastav featuring live countdown, photo gallery, itinerary, and venue directions."
+    />
+    <meta property="og:title" content="Shirsh &amp; Tanu | Royal Wedding Invitation" />
+    <meta
+      property="og:description"
+      content="Together with their families, Shirsh Kumar Srivastav &amp; Tanu Srivastav cordially invite you to celebrate their Shubh Vivah on 07 December 2026 at Venue: Rajan Inter College, Ballia, Uttar Pradesh."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://ais-pre-g4yzzqdvifmj2jm7beye53-862708174483.asia-northeast1.run.app/assets/aistudio/image_3e44442a.png" />
+    <meta property="og:image:secure_url" content="https://ais-pre-g4yzzqdvifmj2jm7beye53-862708174483.asia-northeast1.run.app/assets/aistudio/image_3e44442a.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1536" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Shirsh &amp; Tanu | Royal Wedding Invitation" />
+    <meta name="twitter:description" content="Join us to celebrate the Shubh Vivah of Shirsh &amp; Tanu on 07 December 2026 at Rajan Inter College, Ballia, Uttar Pradesh." />
+    <meta name="twitter:image" content="https://ais-pre-g4yzzqdvifmj2jm7beye53-862708174483.asia-northeast1.run.app/assets/aistudio/image_3e44442a.png" />
+
+    <!-- Google Fonts Preconnect & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Royal Wedding Stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Canvas for Floating Flower Petals -->
+    <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+    <!-- Royal Entrance Preloader -->
+    <div id="preloader" role="status" aria-label="Loading Invitation">
+      <div class="preloader-emblem">
+        <svg class="preloader-ganesha-icon" viewBox="0 0 64 64">
+          <path d="M32 6c-3 0-6 2-7 5-1 0-2-1-3-1-4 0-7 3-7 7 0 2 1 4 2 5-3 2-5 5-5 9 0 6 5 11 11 11h1v8c0 4 3 8 8 8s8-4 8-8v-8h1c6 0 11-5 11-11 0-4-2-7-5-9 1-1 2-3 2-5 0-4-3-7-7-7-1 0-2 1-3 1-1-3-4-5-7-5zm0 4c1.7 0 3 1.3 3 3v2h-6v-2c0-1.7 1.3-3 3-3zm-10 6c1.7 0 3 1.3 3 3v3h-2c-1.7 0-3-1.3-3-3s1.3-3 3-3zm20 0c1.7 0 3 1.3 3 3s-1.3 3-3 3h-2v-3c0-1.7 1.3-3 3-3zm-10 8c4.4 0 8 3.6 8 8v6h-16v-6c0-4.4 3.6-8 8-8zm-12 5c0-1.1.2-2.1.6-3 4.2 1.4 7.4 4.6 8.8 8.8-.9.4-1.9.6-3 .6-3.5 0-6.4-2.9-6.4-6.4zm24 0c0 3.5-2.9 6.4-6.4 6.4-1.1 0-2.1-.2-3-.6 1.4-4.2 4.6-7.4 8.8-8.8.4.9.6 1.9.6 3zm-14 17h16v6c0 2.2-1.8 4-4 4h-8c-2.2 0-4-1.8-4-4v-6z"/>
+        </svg>
+      </div>
+      <h2 class="preloader-title">Shirsh &amp; Tanu</h2>
+      <p class="preloader-subtitle">Wedding Celebration</p>
+      <div class="preloader-bar">
+        <div class="preloader-bar-fill"></div>
+      </div>
+      <button id="preloader-enter-btn" class="preloader-enter-btn" aria-label="Open Invitation and Play Music">
+        <span>🎶</span> Open Invitation &bull; Shubh Vivah
+      </button>
+      <p class="preloader-tap-hint">Tap anywhere to enter with music</p>
+    </div>
+
+    <!-- Hidden Audio Elements (YouTube Player & Local MP3 Fallback) -->
+    <div id="youtube-audio-player" style="position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; bottom: 0; right: 0;"></div>
+    <audio id="wedding-audio" loop preload="none">
+      <source src="./assets/wedding-music.mp3" type="audio/mpeg" />
+      <source src="/assets/wedding-music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Sticky Royal Navbar -->
+    <header class="royal-navbar">
+      <div class="navbar-container">
+        <a href="#hero" class="navbar-brand" aria-label="Shirsh and Tanu Wedding Home">
+          <span class="brand-monogram">S&amp;T</span>
+          <span class="brand-text">07 Dec 2026</span>
+        </a>
+
+        <nav>
+          <ul class="navbar-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#save-the-date">Save The Date</a></li>
+            <li><a href="#countdown">Countdown</a></li>
+            <li><a href="#festivities">Festivities</a></li>
+            <li><a href="#gallery">Moments</a></li>
+            <li><a href="#wishes">Wishes</a></li>
+            <li><a href="#venue">Venue</a></li>
+            <li><a href="#invitation">Invitation</a></li>
+          </ul>
+        </nav>
+
+        <a href="#wishes" class="nav-cta-btn">Send Wishes</a>
+
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Floating Action Buttons (Music & Back To Top) -->
+    <aside class="floating-actions" aria-label="Quick Actions">
+      <div class="music-actions-group">
+        <button
+          id="music-settings-btn"
+          class="music-settings-toggle-btn"
+          title="Choose YouTube Wedding Music"
+          aria-label="Choose YouTube Wedding Music"
+        >
+          🎵
+        </button>
+
+        <button
+          id="music-toggle-btn"
+          class="float-btn music-btn"
+          title="Play Wedding Music"
+          aria-label="Toggle Wedding Music"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+          </svg>
+          <span class="music-soundwaves" aria-hidden="true">
+            <span class="soundwave-bar"></span>
+            <span class="soundwave-bar"></span>
+            <span class="soundwave-bar"></span>
+          </span>
+        </button>
+      </div>
+
+      <button
+        id="back-to-top-btn"
+        class="float-btn back-to-top"
+        title="Scroll to Top"
+        aria-label="Scroll to top of page"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 15l-6-6-6 6" />
+        </svg>
+      </button>
+    </aside>
+
+    <!-- YouTube Music Settings Modal -->
+    <div id="music-modal" class="music-modal" role="dialog" aria-modal="true" aria-label="Choose Wedding Music">
+      <div class="music-modal-card">
+        <div class="music-modal-header">
+          <h3 class="music-modal-title">Wedding Music &bull; विवाह संगीत</h3>
+          <button id="music-modal-close" class="music-modal-close" aria-label="Close Music Modal">&times;</button>
+        </div>
+
+        <p class="section-subtitle" style="text-align: left; margin: 0 0 16px 0; font-size: 1rem;">
+          Select an auspicious Indian wedding soundtrack or paste your own YouTube music link below:
+        </p>
+
+        <!-- Presets -->
+        <div class="music-presets-list">
+          <div class="music-preset-item active" data-yt-id="x9l2VRJ5-3k" data-start="27" data-title="Aaj Sajeya (Wedding Special)">
+            <div class="preset-info">
+              <span class="preset-title">Aaj Sajeya &bull; आज सजेया (Wedding Special)</span>
+              <span class="preset-genre">Romantic Wedding Anthem &bull; Goldie Sohel</span>
+            </div>
+            <span class="preset-badge">Default</span>
+          </div>
+
+          <div class="music-preset-item" data-yt-id="WjaptbvdP8Q" data-start="0" data-title="Din Shagna Da (Royal Instrumental)">
+            <div class="preset-info">
+              <span class="preset-title">Din Shagna Da (Royal Instrumental)</span>
+              <span class="preset-genre">Bridal Entry &bull; Romantic Acoustic</span>
+            </div>
+            <span class="preset-badge">&#9658; Play</span>
+          </div>
+
+          <div class="music-preset-item" data-yt-id="sFMRqxCexDk" data-start="0" data-title="Shehnai &amp; Sitar Vivah Raag">
+            <div class="preset-info">
+              <span class="preset-title">Shehnai &amp; Sitar Vivah Raag</span>
+              <span class="preset-genre">Traditional Royal Wedding &bull; Auspicious</span>
+            </div>
+            <span class="preset-badge">&#9658; Play</span>
+          </div>
+
+          <div class="music-preset-item" data-yt-id="6xW0P88xWlE" data-start="0" data-title="Mangalyam Thanthunanena (Sacred Chants)">
+            <div class="preset-info">
+              <span class="preset-title">Mangalyam Thanthunanena</span>
+              <span class="preset-genre">Saat Phere &bull; Sacred Vedic Vivah Shloka</span>
+            </div>
+            <span class="preset-badge">&#9658; Play</span>
+          </div>
+
+          <div class="music-preset-item" data-yt-id="wT3qA_R0eZw" data-start="0" data-title="Royal Wedding Flute &amp; Shehnai">
+            <div class="preset-info">
+              <span class="preset-title">Royal Wedding Flute &amp; Shehnai</span>
+              <span class="preset-genre">Soft Celebratory Classical Melody</span>
+            </div>
+            <span class="preset-badge">&#9658; Play</span>
+          </div>
+        </div>
+
+        <!-- Custom YouTube Link Input -->
+        <div class="custom-yt-box">
+          <label for="custom-yt-input" class="custom-yt-label">Or Paste Any YouTube Song / Video Link:</label>
+          <div class="custom-yt-row">
+            <input
+              type="text"
+              id="custom-yt-input"
+              class="custom-yt-input"
+              placeholder="e.g. https://www.youtube.com/watch?v=... or Video ID"
+            />
+            <button id="custom-yt-btn" class="custom-yt-btn">Load &amp; Play</button>
+          </div>
+          <p id="yt-status-msg" class="yt-status-text">Click Play or paste a link to enjoy your favorite wedding song.</p>
+        </div>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <!-- ====================================================================
+           SECTION 1: HERO / OPENING SCREEN
+           ==================================================================== -->
+      <section id="hero" class="hero-section">
+        <div class="hero-bg-ornament" aria-hidden="true">
+          <span class="hero-corner top-left"></span>
+          <span class="hero-corner top-right"></span>
+          <span class="hero-corner bottom-left"></span>
+          <span class="hero-corner bottom-right"></span>
+        </div>
+
+        <div class="hero-content">
+          <!-- Ganesha Invocation -->
+          <div class="ganesha-invocation">
+            <svg class="ganesha-icon-svg" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 6c-3 0-6 2-7 5-1 0-2-1-3-1-4 0-7 3-7 7 0 2 1 4 2 5-3 2-5 5-5 9 0 6 5 11 11 11h1v8c0 4 3 8 8 8s8-4 8-8v-8h1c6 0 11-5 11-11 0-4-2-7-5-9 1-1 2-3 2-5 0-4-3-7-7-7-1 0-2 1-3 1-1-3-4-5-7-5zm0 4c1.7 0 3 1.3 3 3v2h-6v-2c0-1.7 1.3-3 3-3zm-10 6c1.7 0 3 1.3 3 3v3h-2c-1.7 0-3-1.3-3-3s1.3-3 3-3zm20 0c1.7 0 3 1.3 3 3s-1.3 3-3 3h-2v-3c0-1.7 1.3-3 3-3zm-10 8c4.4 0 8 3.6 8 8v6h-16v-6c0-4.4 3.6-8 8-8zm-12 5c0-1.1.2-2.1.6-3 4.2 1.4 7.4 4.6 8.8 8.8-.9.4-1.9.6-3 .6-3.5 0-6.4-2.9-6.4-6.4zm24 0c0 3.5-2.9 6.4-6.4 6.4-1.1 0-2.1-.2-3-.6 1.4-4.2 4.6-7.4 8.8-8.8.4.9.6 1.9.6 3zm-14 17h16v6c0 2.2-1.8 4-4 4h-8c-2.2 0-4-1.8-4-4v-6z"/>
+            </svg>
+            <span class="ganesha-text">|| Shree Ganeshaya Namah ||</span>
+          </div>
+
+          <p class="family-invite-line">Together with their families</p>
+
+          <!-- Main Couple Names -->
+          <div class="hero-couple-names">
+            <h1 class="groom-name">Shirsh</h1>
+            <span class="ampersand">&amp;</span>
+            <h1 class="bride-name">Tanu</h1>
+            <p class="alias-names">Shirsh Kumar Srivastav (Mohit) &bull; Tanu Srivastav (Vaishali)</p>
+          </div>
+
+          <!-- Featured Couple Illustration Portrait with Royal Arch & Advanced Depth -->
+          <div class="hero-portrait-wrapper" id="hero-portrait-wrapper">
+            <!-- Ornate Arch Crown Crest -->
+            <div class="hero-arch-crown" aria-hidden="true">
+              <svg viewBox="0 0 120 36" class="hero-crown-svg">
+                <path d="M60 2 L66 12 L78 10 L70 20 L80 28 L66 28 L60 35 L54 28 L40 28 L50 20 L42 10 L54 12 Z" fill="#C9A24D" stroke="#FFF8EB" stroke-width="0.8"/>
+                <circle cx="60" cy="5" r="2.5" fill="#FFF8EB"/>
+                <circle cx="42" cy="11" r="2" fill="#E9A0A8"/>
+                <circle cx="78" cy="11" r="2" fill="#E9A0A8"/>
+              </svg>
+            </div>
+
+            <div class="hero-portrait-glow" aria-hidden="true"></div>
+
+            <div class="hero-portrait-frame" id="hero-portrait-frame">
+              <div class="hero-portrait-shimmer" aria-hidden="true"></div>
+              <img
+                src="./assets/couple-hero.png"
+                alt="Shirsh Kumar Srivastav and Tanu Srivastav"
+                class="hero-portrait-img"
+                loading="eager"
+              />
+              <div class="hero-portrait-badge">Shirsh &amp; Tanu</div>
+            </div>
+
+            <!-- Interactive Hero Shape Switcher -->
+            <div class="hero-shape-pills" role="tablist" aria-label="Hero Frame Silhouette">
+              <button class="hero-shape-pill active" data-hero-shape="arch" role="tab" aria-selected="true" title="Royal Palace Arch Silhouette">
+                <span>🕌</span> Palace Arch
+              </button>
+              <button class="hero-shape-pill" data-hero-shape="oval" role="tab" aria-selected="false" title="Regal Cameo Oval Silhouette">
+                <span>🪞</span> Regal Oval
+              </button>
+              <button class="hero-shape-pill" data-hero-shape="jharokha" role="tab" aria-selected="false" title="Scalloped Jharokha Silhouette">
+                <span>🏛️</span> Jharokha
+              </button>
+            </div>
+          </div>
+
+          <!-- Wedding Announcement -->
+          <p class="hero-announcement">WE ARE GETTING MARRIED</p>
+          <p class="hero-date-line">07 December 2026</p>
+          <p class="hero-day-line">Monday</p>
+
+          <!-- Smooth Scroll Down Indicator -->
+          <a href="#save-the-date" class="hero-scroll-indicator" aria-label="Scroll down to invitation details">
+            <div class="scroll-mouse">
+              <div class="scroll-wheel"></div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 2: SAVE THE DATE
+           ==================================================================== -->
+      <section id="save-the-date" class="save-the-date-section section-wrapper">
+        <div class="std-card reveal">
+          <p class="std-kicker">Mark Your Calendar</p>
+          <h2 class="std-title">SAVE THE DATE</h2>
+
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10022;</span>
+            <span class="divider-line"></span>
+          </div>
+
+          <p class="std-date-hero">07 December 2026</p>
+          <p class="std-day">Monday</p>
+
+          <p class="std-location-note">
+            Venue: Rajan Inter College &bull; Ballia, Uttar Pradesh, India
+          </p>
+
+          <div class="calendar-action-row">
+            <button id="add-to-gcal-btn" class="royal-btn-gold">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              Add to Google Calendar
+            </button>
+            <button id="download-ical-btn" class="royal-btn-outline">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download iCal (.ics)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 3: WEDDING COUNTDOWN
+           ==================================================================== -->
+      <section id="countdown" class="countdown-section section-wrapper">
+        <div class="section-header reveal">
+          <span class="section-tag">Auspicious Beginning</span>
+          <h2 class="section-title">COUNTING DOWN TO FOREVER</h2>
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10047;</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="section-subtitle">
+            Every passing second brings us closer to the sacred moment of union
+          </p>
+        </div>
+
+        <div id="countdown-grid" class="countdown-grid reveal reveal-delay-1">
+          <div class="countdown-card">
+            <div id="countdown-days" class="countdown-number">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-card">
+            <div id="countdown-hours" class="countdown-number">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-card">
+            <div id="countdown-minutes" class="countdown-number">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-card">
+            <div id="countdown-seconds" class="countdown-number">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+
+        <div id="countdown-passed-msg" class="countdown-passed-msg">
+          Forever Begins Here &hearts;
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 4: WEDDING FESTIVITIES (4 CARDS WITH RITUAL PHOTOS)
+           ==================================================================== -->
+      <section id="festivities" class="festivities-section section-wrapper">
+        <div class="section-header reveal">
+          <span class="section-tag">Rituals &amp; Celebrations</span>
+          <h2 class="section-title">WEDDING FESTIVITIES</h2>
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10048;</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="section-subtitle">
+            Four days of sacred traditions, heartwarming laughter, and vibrant festivities
+          </p>
+        </div>
+
+        <div class="events-grid">
+          <!-- EVENT 1: Shubh Tilak -->
+          <article class="event-card reveal">
+            <div>
+              <div class="event-card-media">
+                <img
+                  src="./assets/gallery/groom-tilak.jpeg"
+                  alt="Shirsh during Tilak Ceremony"
+                  class="event-card-img"
+                  loading="lazy"
+                />
+              </div>
+              <div class="event-icon-circle" aria-hidden="true">
+                <svg class="event-icon-svg" viewBox="0 0 24 24">
+                  <path d="M12 2c1.5 2.5 3 4.5 3 7a3 3 0 0 1-6 0c0-2.5 1.5-4.5 3-7z" fill="currentColor"/>
+                  <path d="M3 14c0 4 4 7 9 7s9-3 9-7H3z"/>
+                  <line x1="12" y1="9" x2="12" y2="14"/>
+                </svg>
+              </div>
+              <h3 class="event-title">Shubh Tilak</h3>
+              <div class="event-date-box">
+                <span class="event-date">30 November 2026</span>
+                <span class="event-day">Monday</span>
+              </div>
+              <p class="event-desc">
+                The auspicious beginning marked with sacred tilak, elder blessings, and ceremonial gifts welcoming the bridegroom.
+              </p>
+            </div>
+            <div class="event-badge-tag">Ceremonial Blessing</div>
+          </article>
+
+          <!-- EVENT 2: Haldi & Mehndi -->
+          <article class="event-card reveal reveal-delay-1">
+            <div>
+              <div class="event-card-media">
+                <img
+                  src="./assets/gallery/sacred-hands.jpeg"
+                  alt="Henna and Bridal Bangles"
+                  class="event-card-img"
+                  loading="lazy"
+                />
+              </div>
+              <div class="event-icon-circle" aria-hidden="true">
+                <svg class="event-icon-svg" viewBox="0 0 24 24">
+                  <path d="M12 3a9 9 0 0 0-9 9c0 3.5 2 6.5 5 8 .5-.8 1.5-1.5 2-2.5 1 1 2 1.5 2 2.5 3-1.5 5-4.5 5-8a9 9 0 0 0-5-9z"/>
+                  <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3 class="event-title">Haldi &amp; Mehndi</h3>
+              <div class="event-date-box">
+                <span class="event-date">06 December 2026</span>
+                <span class="event-day">Sunday</span>
+              </div>
+              <p class="event-desc">
+                A joyous afternoon of fragrant golden turmeric paste, intricate henna designs, folk dholak beats, and lively music.
+              </p>
+            </div>
+            <div class="event-badge-tag">Colors &amp; Henna</div>
+          </article>
+
+          <!-- EVENT 3: Wedding Ceremony -->
+          <article class="event-card reveal reveal-delay-2">
+            <div>
+              <div class="event-card-media">
+                <img
+                  src="./assets/gallery/namaste-welcome.jpeg"
+                  alt="Couple Welcoming Guests"
+                  class="event-card-img"
+                  style="object-position: center 12%;"
+                  loading="lazy"
+                />
+              </div>
+              <div class="event-icon-circle" aria-hidden="true">
+                <svg class="event-icon-svg" viewBox="0 0 24 24">
+                  <circle cx="9" cy="12" r="6"/>
+                  <circle cx="15" cy="12" r="6"/>
+                  <path d="M12 6l1.5-3h-3L12 6z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3 class="event-title">Wedding Ceremony</h3>
+              <div class="event-date-box">
+                <span class="event-date">07 December 2026</span>
+                <span class="event-day">Monday</span>
+              </div>
+              <p class="event-desc">
+                The grand celebration featuring the Royal Barat arrival, Jaimala exchange, Saat Phere around the sacred Agni, and Vivah Sanskar.
+              </p>
+            </div>
+            <div class="event-badge-tag">Shubh Vivah &bull; Main Day</div>
+          </article>
+
+          <!-- EVENT 4: Vidai -->
+          <article class="event-card reveal reveal-delay-3">
+            <div>
+              <div class="event-card-media">
+                <img
+                  src="./assets/gallery/walk-together.jpeg"
+                  alt="Walking Hand in Hand into Forever"
+                  class="event-card-img"
+                  loading="lazy"
+                />
+              </div>
+              <div class="event-icon-circle" aria-hidden="true">
+                <svg class="event-icon-svg" viewBox="0 0 24 24">
+                  <path d="M3 18l3-9h12l3 9H3z"/>
+                  <path d="M12 9V3"/>
+                  <path d="M8 3h8"/>
+                  <circle cx="7" cy="19" r="2" fill="currentColor"/>
+                  <circle cx="17" cy="19" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3 class="event-title">Vidai</h3>
+              <div class="event-date-box">
+                <span class="event-date">08 December 2026</span>
+                <span class="event-day">Tuesday</span>
+              </div>
+              <p class="event-desc">
+                An emotional and sweet farewell filled with heartfelt prayers, tender blessings, and stepping together into a blissful new life.
+              </p>
+            </div>
+            <div class="event-badge-tag">Eternal Blessings</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 5: PHOTO GALLERY ("OUR BEAUTIFUL JOURNEY")
+           ==================================================================== -->
+      <section id="gallery" class="gallery-section section-wrapper">
+        <div class="section-header reveal">
+          <span class="section-tag">OUR BEAUTIFUL JOURNEY</span>
+          <h2 class="section-title">MOMENTS TO REMEMBER</h2>
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10022;</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="section-subtitle">
+            A cherished collection of our wedding festivities, sacred rituals, and candid joys
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="gallery-filters-wrapper reveal">
+          <button class="gallery-filter-btn active" data-filter="all">All Memories (16)</button>
+          <button class="gallery-filter-btn" data-filter="portraits">Couple Portraits</button>
+          <button class="gallery-filter-btn" data-filter="rituals">Sacred Rituals</button>
+          <button class="gallery-filter-btn" data-filter="elegance">Bridal &amp; Royal Style</button>
+        </div>
+
+        <!-- Interactive Frame Silhouette & Shape Switcher -->
+        <div class="gallery-shape-toolbar reveal">
+          <span class="shape-toolbar-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            Photo Frame Silhouette:
+          </span>
+          <div class="gallery-shape-buttons" role="tablist" aria-label="Photo Frame Silhouettes">
+            <button class="gallery-shape-btn active" data-shape="arch" role="tab" aria-selected="true" title="Royal Palace Arch Silhouette">
+              <span class="shape-icon">🕌</span> Palace Arch
+            </button>
+            <button class="gallery-shape-btn" data-shape="cameo" role="tab" aria-selected="false" title="Regal Cameo Oval Silhouette">
+              <span class="shape-icon">🪞</span> Regal Oval
+            </button>
+            <button class="gallery-shape-btn" data-shape="scallop" role="tab" aria-selected="false" title="Scalloped Jharokha Silhouette">
+              <span class="shape-icon">🏛️</span> Scalloped
+            </button>
+            <button class="gallery-shape-btn" data-shape="luxe" role="tab" aria-selected="false" title="Contemporary Royal Bezel Silhouette">
+              <span class="shape-icon">✨</span> Luxe Bezel
+            </button>
+          </div>
+        </div>
+
+        <div id="gallery-grid" class="gallery-grid shape-arch">
+          <!-- Item 0 (Featured Mandap Illustration) -->
+          <div class="gallery-item featured reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="0" role="button" tabindex="0" aria-label="View Royal Mandap Portrait">
+              <img src="./assets/couple-hero.png" alt="Shirsh &amp; Tanu - The Royal Mandap Portrait" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">The Royal Mandap Portrait</h3>
+                <p class="gallery-subtext">A digital celebration under the golden lights of togetherness</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 1 (Full Traditional Attire) -->
+          <div class="gallery-item secondary reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="1" role="button" tabindex="0" aria-label="View Elegance &amp; Tradition">
+              <img src="./assets/couple-illustration.png" alt="Shirsh &amp; Tanu in Traditional Attire" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Elegance &amp; Tradition</h3>
+                <p class="gallery-subtext">Peacock lehenga and embroidered ivory sherwani</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 2 (Mandap Real Photo) -->
+          <div class="gallery-item half-width reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="2" role="button" tabindex="0" aria-label="View Shubh Vivah Stage">
+              <img src="./assets/gallery/moment-mandap.jpeg" alt="Shirsh and Tanu on Stage" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Shubh Vivah Stage</h3>
+                <p class="gallery-subtext">Poise and elegance before the grand golden floral arch</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 3 (Gaze of Forever) -->
+          <div class="gallery-item half-width reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="3" role="button" tabindex="0" aria-label="View A Gaze of Forever">
+              <img src="./assets/gallery/moment-gaze.jpeg" alt="A Candid Glance" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">A Gaze of Forever</h3>
+                <p class="gallery-subtext">A silent promise of eternal love and companionship</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 4 (Namaste Welcome) -->
+          <div class="gallery-item half-width reveal" data-category="rituals">
+            <div class="gallery-card" data-gallery-index="4" role="button" tabindex="0" aria-label="View Pranaam &amp; Warm Greetings">
+              <img src="./assets/gallery/namaste-welcome.jpeg" alt="Couple Greeting with Pranaam" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Pranaam &amp; Warm Greetings</h3>
+                <p class="gallery-subtext">Welcoming all cherished guests with folded hands</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 5 (Groom Tilak Ceremony) -->
+          <div class="gallery-item half-width reveal" data-category="rituals">
+            <div class="gallery-card" data-gallery-index="5" role="button" tabindex="0" aria-label="View Shubh Tilak Ceremony">
+              <img src="./assets/gallery/groom-tilak.jpeg" alt="Shirsh during Tilak" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Shubh Tilak Ceremony</h3>
+                <p class="gallery-subtext">Sacred vermilion mark, garland, and Vedic blessings</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 6 (Hathleva Hands) -->
+          <div class="gallery-item half-width reveal" data-category="rituals">
+            <div class="gallery-card" data-gallery-index="6" role="button" tabindex="0" aria-label="View Hathleva &amp; Sacred Union">
+              <img src="./assets/gallery/sacred-hands.jpeg" alt="Intricate Henna and Bangles Holding Hands" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Hathleva &amp; Sacred Union</h3>
+                <p class="gallery-subtext">Henna and glittering bangles joined in destiny</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 7 (Walk Together) -->
+          <div class="gallery-item half-width reveal" data-category="rituals">
+            <div class="gallery-card" data-gallery-index="7" role="button" tabindex="0" aria-label="View Stepping Towards Eternity">
+              <img src="./assets/gallery/walk-together.jpeg" alt="Walking Hand in Hand" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Stepping Towards Eternity</h3>
+                <p class="gallery-subtext">Walking down the aisle toward a joyous new dawn</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 8 (The Royal Bride) -->
+          <div class="gallery-item half-width reveal" data-category="elegance">
+            <div class="gallery-card" data-gallery-index="8" role="button" tabindex="0" aria-label="View The Royal Bride">
+              <img src="./assets/gallery/bride-royal.jpeg" alt="Tanu in Royal Lehenga" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">The Royal Bride</h3>
+                <p class="gallery-subtext">Radiating timeless beauty in her handcrafted lehenga</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 9 (Bridal Grace & Radiance) -->
+          <div class="gallery-item half-width reveal" data-category="elegance">
+            <div class="gallery-card" data-gallery-index="9" role="button" tabindex="0" aria-label="View Bridal Grace &amp; Radiance">
+              <img src="./assets/gallery/bride-smile.jpeg" alt="Tanu Smiling Gracefully" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Bridal Grace &amp; Radiance</h3>
+                <p class="gallery-subtext">A tender smile illuminating our hearts</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 10 (Heart to Heart Close) -->
+          <div class="gallery-item half-width reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="10" role="button" tabindex="0" aria-label="View Heart to Heart">
+              <img src="./assets/gallery/moment-close.jpeg" alt="Shirsh and Tanu Smiling Together" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Heart to Heart</h3>
+                <p class="gallery-subtext">Cherishing every laughter-filled second together</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 11 (Joy & High Spirits) -->
+          <div class="gallery-item half-width reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="11" role="button" tabindex="0" aria-label="View Joy &amp; High Spirits">
+              <img src="./assets/gallery/moment-joy.jpeg" alt="Joyful Moments" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Joy &amp; High Spirits</h3>
+                <p class="gallery-subtext">Celebrating the beginning of our new chapter</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 12 (Bound by Devotion) -->
+          <div class="gallery-item half-width reveal" data-category="rituals">
+            <div class="gallery-card" data-gallery-index="12" role="button" tabindex="0" aria-label="View Bound by Devotion">
+              <img src="./assets/gallery/holding-hands.jpeg" alt="Holding Hands Softly" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Bound by Devotion</h3>
+                <p class="gallery-subtext">United by destiny and blessed by the divine elders</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 13 (Harmony & Grace) -->
+          <div class="gallery-item half-width reveal" data-category="elegance">
+            <div class="gallery-card" data-gallery-index="13" role="button" tabindex="0" aria-label="View Harmony &amp; Grace">
+              <img src="./assets/gallery/couple-grace.jpeg" alt="Standing Together in Harmony" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Harmony &amp; Grace</h3>
+                <p class="gallery-subtext">Devotion, elegance, and understanding</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 14 (Together Forever Real Cutout) -->
+          <div class="gallery-item half-width reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="14" role="button" tabindex="0" aria-label="View Together Forever">
+              <img src="./assets/couple-photo-1.png" alt="Together Forever Cutout" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Together Forever</h3>
+                <p class="gallery-subtext">A lifetime of boundless love, companionship, and peace</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+
+          <!-- Item 15 (Pure Joy & Laughter) -->
+          <div class="gallery-item half-width reveal" data-category="portraits">
+            <div class="gallery-card" data-gallery-index="15" role="button" tabindex="0" aria-label="View Pure Joy &amp; Laughter">
+              <img src="./assets/couple-photo-2.png" alt="Pure Joy &amp; Laughter" class="gallery-img" loading="lazy" />
+              <div class="gallery-overlay">
+                <h3 class="gallery-title">Pure Joy &amp; Laughter</h3>
+                <p class="gallery-subtext">Every joyful smile holds a chapter of our eternal romance</p>
+              </div>
+              <div class="gallery-zoom-badge" aria-hidden="true">&#x26F6;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           FULL-SCREEN LIGHTBOX MODAL
+           ==================================================================== -->
+      <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+        <button id="lightbox-close" class="lightbox-btn lightbox-close" aria-label="Close Lightbox">&times;</button>
+        <button id="lightbox-prev" class="lightbox-btn lightbox-prev" aria-label="Previous Photo">&#10094;</button>
+        <button id="lightbox-next" class="lightbox-btn lightbox-next" aria-label="Next Photo">&#10095;</button>
+
+        <div class="lightbox-container">
+          <div class="lightbox-img-wrapper">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="Full view" />
+          </div>
+          <div class="lightbox-caption-bar">
+            <p id="lightbox-caption" class="lightbox-caption"></p>
+            <span id="lightbox-counter" class="lightbox-counter"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           NEW SECTION: BLESSINGS & HEARTFELT WISHES (GUESTBOOK & WISH WALL)
+           ==================================================================== -->
+      <section id="wishes" class="wishes-section section-wrapper">
+        <div class="section-header reveal">
+          <span class="section-tag">SHOWER YOUR LOVE</span>
+          <h2 class="section-title">BLESSINGS &amp; HEARTFELT WISHES</h2>
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10084;</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="section-subtitle">
+            Your loving prayers, wishes, and warm thoughts mean the world to Shirsh &amp; Tanu
+          </p>
+        </div>
+
+        <div class="wishes-layout">
+          <!-- Left: Wish Submission Form -->
+          <div class="wish-form-card reveal">
+            <h3 class="wish-form-title">Send Your Blessings</h3>
+            <p class="wish-form-sub">Write a personal message to celebrate the bride &amp; groom</p>
+
+            <form id="wish-submit-form" class="wish-form">
+              <div class="form-group">
+                <label for="wish-name" class="form-label">Your Name *</label>
+                <input
+                  type="text"
+                  id="wish-name"
+                  class="form-input"
+                  placeholder="e.g. Ramesh Kumar / Ananya"
+                  maxlength="80"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="wish-relation" class="form-label">Relationship / Relation</label>
+                <select id="wish-relation" class="form-select">
+                  <option value="Family Member">Family Member</option>
+                  <option value="Close Friend">Close Friend</option>
+                  <option value="Relative">Relative</option>
+                  <option value="Colleague">Colleague</option>
+                  <option value="Well-wisher" selected>Well-wisher</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="wish-text" class="form-label">Your Heartfelt Blessing *</label>
+                <textarea
+                  id="wish-text"
+                  class="form-textarea"
+                  placeholder="Share your prayers, sweet memories, or congratulations..."
+                  maxlength="500"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" id="wish-submit-btn" class="wish-submit-btn">
+                <span>&#10047;</span>
+                Post Your Blessing
+              </button>
+
+              <div id="wish-success-toast" class="wish-toast">
+                Thank you! Your loving blessing has been added to our wedding wall &hearts;
+              </div>
+              <div id="wish-error-toast" class="wish-toast" style="background: #fff1f2; color: #9f1239; border-color: #fda4af;">
+                Could not post your blessing right now. Please check your connection and try again.
+              </div>
+            </form>
+          </div>
+
+          <!-- Right: Live Wall of Wishes -->
+          <div class="reveal reveal-delay-1">
+            <div id="wishes-wall-container" class="wishes-wall">
+              <!-- Dynamically populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 6: WEDDING VENUE ("JOIN OUR CELEBRATION")
+           ==================================================================== -->
+      <section id="venue" class="venue-section section-wrapper">
+        <div class="section-header reveal">
+          <span class="section-tag">JOIN OUR CELEBRATION</span>
+          <h2 class="section-title">WEDDING VENUE</h2>
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10038;</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="section-subtitle">
+            We eagerly look forward to welcoming you to celebrate our special day
+          </p>
+        </div>
+
+        <div class="venue-card-wrapper reveal">
+          <div class="venue-card">
+            <!-- Left Info Side -->
+            <div class="venue-info-side">
+              <span class="venue-badge">Main Ceremony Venue</span>
+              <h3 class="venue-name">Rajan Inter College</h3>
+
+              <div class="venue-location">
+                <svg class="venue-icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Venue: Ballia, Uttar Pradesh, India</span>
+              </div>
+
+              <ul class="venue-details-list">
+                <li class="venue-detail-item">
+                  <strong>Venue:</strong>
+                  <span>Rajan Inter College, Ballia (U.P.)</span>
+                </li>
+                <li class="venue-detail-item">
+                  <strong>Date:</strong>
+                  <span>Monday, 07 December 2026</span>
+                </li>
+                <li class="venue-detail-item">
+                  <strong>Barat Arrival:</strong>
+                  <span>7:00 PM onwards</span>
+                </li>
+                <li class="venue-detail-item">
+                  <strong>Dinner &amp; Reception:</strong>
+                  <span>8:00 PM onwards</span>
+                </li>
+                <li class="venue-detail-item">
+                  <strong>Dress Code:</strong>
+                  <span>Traditional Royal Indian Attire</span>
+                </li>
+              </ul>
+
+              <div>
+                <button id="venue-directions-btn" class="royal-btn-gold">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                  </svg>
+                  GET DIRECTIONS
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Visual Emblem Side -->
+            <div class="venue-visual-side">
+              <svg class="venue-mandala-emblem" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="1"/>
+                <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M50 8 L54 24 L50 20 L46 24 Z" fill="currentColor"/>
+                <path d="M50 92 L54 76 L50 80 L46 76 Z" fill="currentColor"/>
+                <path d="M8 50 L24 54 L20 50 L24 46 Z" fill="currentColor"/>
+                <path d="M92 50 L76 54 L80 50 L76 46 Z" fill="currentColor"/>
+                <circle cx="50" cy="50" r="8" fill="currentColor"/>
+              </svg>
+              <h4 class="venue-welcome-text">Padharo Mhare Desh</h4>
+              <p class="venue-welcome-sub">
+                "Atithi Devo Bhava — Your presence is our most cherished blessing."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 7: INVITATION MESSAGE ("YOU'RE INVITED!")
+           ==================================================================== -->
+      <section id="invitation" class="invitation-section section-wrapper">
+        <div class="invitation-card reveal">
+          <p class="invitation-header-tag">With Grateful Hearts</p>
+          <h2 class="invitation-heading">YOU'RE INVITED!</h2>
+
+          <div class="royal-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-icon">&#10047;</span>
+            <span class="divider-line"></span>
+          </div>
+
+          <blockquote class="invitation-quote">
+            "Your gracious presence will make our celebration even more special."
+          </blockquote>
+
+          <!-- Digital Invitation Photo Card Preview -->
+          <div class="invite-preview-card">
+            <div class="invite-card-img-wrap">
+              <span class="invite-card-badge">Royal Wedding Card</span>
+              <img
+                src="./assets/aistudio/image_3e44442a.png"
+                alt="Shirsh &amp; Tanu Royal Wedding Invitation Card"
+                class="invite-card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="invite-card-info">
+              <div class="invite-card-couple">Shirsh &amp; Tanu</div>
+              <div class="invite-card-date">Venue: Rajan Inter College, Ballia &bull; 07 December 2026</div>
+            </div>
+          </div>
+
+          <div class="invitation-compliments">
+            <p class="compliments-tag">With Love &amp; Blessings</p>
+            <h3 class="family-title">THE SRIVASTAV FAMILY</h3>
+          </div>
+
+          <div class="invite-actions-row">
+            <button id="whatsapp-share-btn" class="whatsapp-share-btn" aria-label="Share Invitation Card on WhatsApp">
+              <!-- WhatsApp Icon SVG -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+              Share Invitation on WhatsApp
+            </button>
+            <a
+              id="download-card-btn"
+              href="./assets/aistudio/image_3e44442a.png"
+              download="Shirsh-Tanu-Wedding-Invitation-Card.png"
+              class="download-card-btn"
+              aria-label="Download Wedding Invitation Card"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download Invitation Card
+            </a>
+          </div>
+
+          <p id="share-hint-tip" class="share-hint-tip">
+            <span>✨</span> Share karne par ye Wedding Invitation Card message ke sath share hoga
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====================================================================
+         SECTION 8: FOOTER
+         ==================================================================== -->
+    <footer class="royal-footer">
+      <h3 class="footer-couple-names">Shirsh &amp; Tanu</h3>
+      <p class="footer-wedding-date">07 December 2026 &bull; Venue: Rajan Inter College, Ballia, U.P.</p>
+      <p class="footer-message">
+        "Thank you for being part of our beautiful journey."
+        <span class="footer-heart" aria-hidden="true">&hearts;</span>
+      </p>
+      <div class="footer-bottom-copy">
+        Celebration of Shirsh Kumar Srivastav &amp; Tanu Srivastav &bull; Srivastav Family
+      </div>
+    </footer>
+
+    <!-- Royal Wedding JavaScript -->
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

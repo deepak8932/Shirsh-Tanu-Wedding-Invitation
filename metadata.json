@@ -1,0 +1,6 @@
+{
+  "name": "Shirsh & Tanu | Royal Wedding Invitation",
+  "description": "Premium, royal Indian wedding invitation website for Shirsh Kumar Srivastav & Tanu Srivastav featuring live countdown, photo gallery, itinerary, and venue directions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

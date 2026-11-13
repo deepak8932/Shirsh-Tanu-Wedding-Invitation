@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "Wish": {
+      "title": "Wedding Wish",
+      "description": "A heartfelt blessing or congratulatory message posted by a wedding guest on the shared guestbook wall.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "Display name of the guest sending the blessing."
+        },
+        "relation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "description": "Guest relationship to the bride or groom."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "The heartfelt blessing message."
+        },
+        "avatar": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4,
+          "description": "Single-character monogram initial for the wish avatar."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the wish was submitted."
+        }
+      },
+      "required": ["name", "relation", "text", "avatar", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/wishes/{wishId}": {
+      "schema": {
+        "$ref": "#/entities/Wish"
+      },
+      "description": "Public collection of shared wedding wishes visible to all wedding invitation visitors."
+    }
+  }
+}
